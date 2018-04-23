@@ -9,6 +9,7 @@
 	<modules>
 		<module>discovery-service</module>
 		<module>config-service</module>
+		<module>employee-service</module>
 	</modules>
 	
 </project>
