@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import pl.piomin.services.department.client.EmployeeClient;
 import pl.piomin.services.department.model.Department;
 import pl.piomin.services.department.repository.DepartmentRepository;
 
@@ -21,6 +22,8 @@ public class DepartmentController {
 	
 	@Autowired
 	DepartmentRepository repository;
+	@Autowired
+	EmployeeClient employeeClient;
 	
 	@PostMapping
 	public Department add(@RequestBody Department department) {
@@ -44,6 +47,14 @@ public class DepartmentController {
 	public List<Department> findByOrganization(@PathVariable("organizationId") Long organizationId) {
 		LOGGER.info("Department find: organizationId={}", organizationId);
 		return repository.findByOrganization(organizationId);
+	}
+	
+	@GetMapping("/organization/{organizationId}/with-employees")
+	public List<Department> findByOrganizationWithEmployees(@PathVariable("organizationId") Long organizationId) {
+		LOGGER.info("Department find: organizationId={}", organizationId);
+		List<Department> departments = repository.findByOrganization(organizationId);
+		departments.forEach(d -> d.setEmployees(employeeClient.findByDepartment(d.getId())));
+		return departments;
 	}
 	
 }

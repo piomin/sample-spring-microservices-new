@@ -11,6 +11,8 @@
 		<module>config-service</module>
 		<module>employee-service</module>
 		<module>department-service</module>
+		<module>organization-service</module>
+		<module>gateway-service</module>
 	</modules>
 	
 </project>

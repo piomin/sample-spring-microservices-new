@@ -5,7 +5,7 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.0.0.RELEASE</version>
 	</parent>
-	<artifactId>department-service</artifactId>
+	<artifactId>organization-service</artifactId>
 	<groupId>pl.piomin.services</groupId>
 	<version>1.0-SNAPSHOT</version>
 
