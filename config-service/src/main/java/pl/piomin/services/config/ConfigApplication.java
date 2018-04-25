@@ -1,4 +1,4 @@
-package pl.piomin.services.discovery;
+package pl.piomin.services.config;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
