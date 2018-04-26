@@ -25,7 +25,7 @@ public class DepartmentController {
 	@Autowired
 	EmployeeClient employeeClient;
 	
-	@PostMapping
+	@PostMapping("/")
 	public Department add(@RequestBody Department department) {
 		LOGGER.info("Department add: {}", department);
 		return repository.add(department);
@@ -37,7 +37,7 @@ public class DepartmentController {
 		return repository.findById(id);
 	}
 	
-	@GetMapping
+	@GetMapping("/")
 	public List<Department> findAll() {
 		LOGGER.info("Department find");
 		return repository.findAll();

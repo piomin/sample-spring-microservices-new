@@ -13,6 +13,7 @@
 		<module>department-service</module>
 		<module>organization-service</module>
 		<module>gateway-service</module>
+		<module>proxy-service</module>
 	</modules>
 	
 </project>
