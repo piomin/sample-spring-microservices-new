@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/config-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/department-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/discovery-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/employee-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gateway-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/organization-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/proxy-service" charset="UTF-8" />
+  </component>
+</project>
