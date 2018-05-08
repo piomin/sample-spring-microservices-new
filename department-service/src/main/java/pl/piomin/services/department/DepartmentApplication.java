@@ -32,7 +32,7 @@ public class DepartmentApplication {
 					.apis(RequestHandlerSelectors.basePackage("pl.piomin.services.department.controller"))
 					.paths(PathSelectors.any())
 				.build()
-				.apiInfo(new ApiInfoBuilder().version("1.0").title("Employee API").description("Documentation Employee API v1.0").build());
+				.apiInfo(new ApiInfoBuilder().version("1.0").title("Department API").description("Documentation Department API v1.0").build());
 	}
 	
 	@Bean
