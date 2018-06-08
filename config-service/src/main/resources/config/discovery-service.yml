@@ -9,3 +9,7 @@ eureka:
     fetchRegistry: false
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      
+management:
+  endpoint.shutdown.enabled: true
+  endpoints.web.exposure.include: '*'

@@ -1,3 +1,3 @@
-## Quick Guide to Microservices with Spring Boot 2.0, Eureka and Spring Cloud
+## Managing Spring Boot apps locally with Trampoline
 
-Detailed description can be found here: [Quick Guide to Microservices with Spring Boot 2.0, Eureka and Spring Cloud](https://piotrminkowski.wordpress.com/2018/04/26/quick-guide-to-microservices-with-spring-boot-2-0-eureka-and-spring-cloud/) 
+Detailed description can be found here: [Managing Spring Boot apps locally with Trampoline](https://piotrminkowski.wordpress.com/2018/06/08/managing-spring-boot-apps-locally-with-trampoline/) 
