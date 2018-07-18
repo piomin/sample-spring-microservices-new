@@ -1,0 +1,15 @@
+= RESTful Employee API Specification
+{project-version}
+:doctype: book
+
+== Add a new person
+
+A `POST` request is used to add a new person
+
+operation::add-person[snippets='http-request,request-fields,http-response']
+
+== Find a person by id
+
+A `GET` request is used to find a new person by id
+
+operation::find-person-by-id[snippets='http-request,path-parameters,http-response,response-fields']
