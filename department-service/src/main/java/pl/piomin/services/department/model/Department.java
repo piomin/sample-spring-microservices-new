@@ -3,6 +3,9 @@ package pl.piomin.services.department.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "department")
 public class Department {
 
 	private Long id;

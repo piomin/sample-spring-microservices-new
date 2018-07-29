@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import pl.piomin.services.organization.model.Department;
 
-@FeignClient(name = "department-service")
+@FeignClient(name = "department")
 public interface DepartmentClient {
 
 	@GetMapping("/organization/{organizationId}")

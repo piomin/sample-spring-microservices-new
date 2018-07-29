@@ -1,9 +1,9 @@
 spring:
   application:
-    name: organization-service
+    name: organization
   data:
     mongodb:
-      uri: mongodb://mongodb:27017/${MONGO_DATABASE}
+      uri: mongodb://mongodb/${MONGO_DATABASE}
       password: ${MONGO_PASSWORD}
       username: ${MONGO_USERNAME}
       

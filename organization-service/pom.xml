@@ -18,7 +18,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>Finchley.RC1</version>
+				<version>Finchley.RELEASE</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -28,8 +28,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-kubernetes-netflix</artifactId>
-			<version>0.2.0.RELEASE</version>
+			<artifactId>spring-cloud-starter-kubernetes</artifactId>
+			<version>0.3.0.BUILD-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
