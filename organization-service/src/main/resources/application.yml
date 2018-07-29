@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: organization-service
+  data:
+    mongodb:
+      database: ${MONGO_DATABASE}
+      host: mongodb
+      password: ${MONGO_PASSWORD}
+      username: ${MONGO_USERNAME}
+      
+logging:
+  pattern: 
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
