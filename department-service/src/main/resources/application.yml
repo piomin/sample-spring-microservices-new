@@ -3,8 +3,7 @@ spring:
     name: department
   data:
     mongodb:
-      database: ${MONGO_DATABASE}
-      host: mongodb
+      uri: mongodb://mongodb:27017/${MONGO_DATABASE}
       password: ${MONGO_PASSWORD}
       username: ${MONGO_USERNAME}
       
