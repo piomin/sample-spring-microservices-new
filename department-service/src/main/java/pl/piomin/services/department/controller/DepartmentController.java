@@ -28,17 +28,17 @@ public class DepartmentController {
 	@PostMapping("/")
 	public Department add(@RequestBody Department department) {
 		LOGGER.info("Department add: {}", department);
-		return repository.add(department);
+		return repository.save(department);
 	}
 	
 	@GetMapping("/{id}")
-	public Department findById(@PathVariable("id") Long id) {
+	public Department findById(@PathVariable("id") String id) {
 		LOGGER.info("Department find: id={}", id);
-		return repository.findById(id);
+		return repository.findById(id).get();
 	}
 	
 	@GetMapping("/")
-	public List<Department> findAll() {
+	public Iterable<Department> findAll() {
 		LOGGER.info("Department find");
 		return repository.findAll();
 	}
@@ -46,13 +46,13 @@ public class DepartmentController {
 	@GetMapping("/organization/{organizationId}")
 	public List<Department> findByOrganization(@PathVariable("organizationId") Long organizationId) {
 		LOGGER.info("Department find: organizationId={}", organizationId);
-		return repository.findByOrganization(organizationId);
+		return repository.findByOrganizationId(organizationId);
 	}
 	
 	@GetMapping("/organization/{organizationId}/with-employees")
 	public List<Department> findByOrganizationWithEmployees(@PathVariable("organizationId") Long organizationId) {
 		LOGGER.info("Department find: organizationId={}", organizationId);
-		List<Department> departments = repository.findByOrganization(organizationId);
+		List<Department> departments = repository.findByOrganizationId(organizationId);
 		departments.forEach(d -> d.setEmployees(employeeClient.findByDepartment(d.getId())));
 		return departments;
 	}

@@ -1,10 +1,14 @@
 package pl.piomin.services.organization;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import pl.piomin.services.organization.model.Organization;
 import pl.piomin.services.organization.repository.OrganizationRepository;
@@ -18,9 +22,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
+@EnableMongoRepositories
 @EnableSwagger2
 public class OrganizationApplication {
 
+	@Autowired
+	OrganizationRepository repository;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(OrganizationApplication.class, args);
 	}
@@ -35,12 +43,10 @@ public class OrganizationApplication {
 				.apiInfo(new ApiInfoBuilder().version("1.0").title("Organization API").description("Documentation Organization API v1.0").build());
 	}
 	
-	@Bean
-	OrganizationRepository repository() {
-		OrganizationRepository repository = new OrganizationRepository();
-		repository.add(new Organization("Microsoft", "Redmond, Washington, USA"));
-		repository.add(new Organization("Oracle", "Redwood City, California, USA"));	
-		return repository;
+	@PostConstruct
+	public void init() {
+		repository.save(new Organization("Microsoft", "Redmond, Washington, USA"));
+		repository.save(new Organization("Oracle", "Redwood City, California, USA"));
 	}
 	
 }

@@ -3,14 +3,18 @@ package pl.piomin.services.department.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "department")
 public class Department {
 
-	private Long id;
+	@Id
+	private String id;
 	private Long organizationId;
 	private String name;
+	@Transient
 	private List<Employee> employees = new ArrayList<>();
 
 	public Department() {
@@ -23,11 +27,11 @@ public class Department {
 		this.name = name;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

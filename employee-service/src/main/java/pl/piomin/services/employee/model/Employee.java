@@ -1,11 +1,13 @@
 package pl.piomin.services.employee.model;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "employee")
 public class Employee {
 
-	private Long id;
+	@Id
+	private String id;
 	private Long organizationId;
 	private Long departmentId;
 	private String name;
@@ -24,11 +26,11 @@ public class Employee {
 		this.position = position;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

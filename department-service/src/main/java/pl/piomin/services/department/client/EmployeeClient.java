@@ -12,6 +12,6 @@ import pl.piomin.services.department.model.Employee;
 public interface EmployeeClient {
 
 	@GetMapping("/department/{departmentId}")
-	List<Employee> findByDepartment(@PathVariable("departmentId") Long departmentId);
+	List<Employee> findByDepartment(@PathVariable("departmentId") String departmentId);
 	
 }

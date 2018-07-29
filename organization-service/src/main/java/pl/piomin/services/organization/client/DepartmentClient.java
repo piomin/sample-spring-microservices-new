@@ -12,9 +12,9 @@ import pl.piomin.services.organization.model.Department;
 public interface DepartmentClient {
 
 	@GetMapping("/organization/{organizationId}")
-	public List<Department> findByOrganization(@PathVariable("organizationId") Long organizationId);
+	public List<Department> findByOrganization(@PathVariable("organizationId") String organizationId);
 	
 	@GetMapping("/organization/{organizationId}/with-employees")
-	public List<Department> findByOrganizationWithEmployees(@PathVariable("organizationId") Long organizationId);
+	public List<Department> findByOrganizationWithEmployees(@PathVariable("organizationId") String organizationId);
 	
 }
