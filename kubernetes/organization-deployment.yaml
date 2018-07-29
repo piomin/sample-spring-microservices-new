@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: organization-deployment
+  labels:
+    app: organization
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: organization
+  template:
+    metadata:
+      labels:
+        app: organization
+    spec:
+      containers:
+      - name: organization
+        image: piomin/organization:1.0
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MONGO_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: mongodb
+              key: MONGO_INITDB_DATABASE
+        - name: MONGO_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongodb
+              key: MONGO_INITDB_ROOT_USERNAME
+        - name: MONGO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb
+              key: MONGO_INITDB_ROOT_PASSWORD
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: organization
+  labels:
+    run: organization
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+  selector:
+    run: organization
