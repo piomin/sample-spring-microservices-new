@@ -5,3 +5,15 @@ spring:
 logging:
   pattern: 
     console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+    
+zuul:
+  routes:
+    department:
+      path: /department/**
+      serviceId: department
+    employee:
+      path: /employee/**
+      serviceId: employee
+    organization:
+      path: /organization/**
+      serviceId: organization
