@@ -24,7 +24,7 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: mongodb
-              key: database-password
+              key: database-name
         - name: MONGO_USERNAME
           valueFrom:
             secretKeyRef:
@@ -41,10 +41,10 @@ kind: Service
 metadata:
   name: employee
   labels:
-    run: employee
+    app: employee
 spec:
   ports:
   - port: 8080
     protocol: TCP
   selector:
-    run: employee
+    app: employee

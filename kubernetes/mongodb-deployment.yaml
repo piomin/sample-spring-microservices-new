@@ -41,11 +41,10 @@ kind: Service
 metadata:
   name: mongodb
   labels:
-    run: mongodb
+    app: mongodb
 spec:
   ports:
   - port: 27017
     protocol: TCP
   selector:
-    run: mongodb
-  type: NodePort
+    app: mongodb

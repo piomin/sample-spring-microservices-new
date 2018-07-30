@@ -41,10 +41,10 @@ kind: Service
 metadata:
   name: department
   labels:
-    run: department
+    app: department
 spec:
   ports:
   - port: 8080
     protocol: TCP
   selector:
-    run: department
+    app: department
