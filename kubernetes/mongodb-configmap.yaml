@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: mongodb
 data:
-  MONGO_INITDB_DATABASE: microservices
+  database-name: microservices

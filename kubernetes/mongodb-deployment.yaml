@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongodb-deployment
+  name: mongodb
   labels:
     app: mongodb
 spec:
@@ -24,17 +24,17 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: mongodb
-              key: MONGO_INITDB_DATABASE
+              key: database-name
         - name: MONGO_INITDB_ROOT_USERNAME
           valueFrom:
             secretKeyRef:
               name: mongodb
-              key: MONGO_INITDB_ROOT_USERNAME
+              key: database-user
         - name: MONGO_INITDB_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mongodb
-              key: MONGO_INITDB_ROOT_PASSWORD
+              key: database-password
 ---
 apiVersion: v1
 kind: Service
@@ -48,3 +48,4 @@ spec:
     protocol: TCP
   selector:
     run: mongodb
+  type: NodePort

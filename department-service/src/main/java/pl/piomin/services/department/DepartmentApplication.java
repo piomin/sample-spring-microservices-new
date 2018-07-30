@@ -1,7 +1,5 @@
 package pl.piomin.services.department;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,7 +8,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import pl.piomin.services.department.model.Department;
 import pl.piomin.services.department.repository.DepartmentRepository;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -41,14 +38,6 @@ public class DepartmentApplication {
 					.paths(PathSelectors.any())
 				.build()
 				.apiInfo(new ApiInfoBuilder().version("1.0").title("Department API").description("Documentation Department API v1.0").build());
-	}
-	
-	@PostConstruct
-	public void init() {
-		repository.save(new Department(1L, "Development"));
-		repository.save(new Department(1L, "Operations"));
-		repository.save(new Department(2L, "Development"));
-		repository.save(new Department(2L, "Operations"));
 	}
 	
 }

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: employee-deployment
+  name: employee
   labels:
     app: employee
 spec:
@@ -24,17 +24,17 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: mongodb
-              key: MONGO_INITDB_DATABASE
+              key: database-password
         - name: MONGO_USERNAME
           valueFrom:
             secretKeyRef:
               name: mongodb
-              key: MONGO_INITDB_ROOT_USERNAME
+              key: database-user
         - name: MONGO_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mongodb
-              key: MONGO_INITDB_ROOT_PASSWORD
+              key: database-password
 ---
 apiVersion: v1
 kind: Service

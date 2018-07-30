@@ -1,7 +1,5 @@
 package pl.piomin.services.employee;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +7,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-import pl.piomin.services.employee.model.Employee;
 import pl.piomin.services.employee.repository.EmployeeRepository;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -39,20 +36,6 @@ public class EmployeeApplication {
 					.paths(PathSelectors.any())
 				.build()
 				.apiInfo(new ApiInfoBuilder().version("1.0").title("Employee API").description("Documentation Employee API v1.0").build());
-	}
-	
-	@PostConstruct
-	public void init() {
-		repository.save(new Employee(1L, 1L, "John Smith", 34, "Analyst"));
-		repository.save(new Employee(1L, 1L, "Darren Hamilton", 37, "Manager"));
-		repository.save(new Employee(1L, 1L, "Tom Scott", 26, "Developer"));
-		repository.save(new Employee(1L, 2L, "Anna London", 39, "Analyst"));		
-		repository.save(new Employee(1L, 2L, "Patrick Dempsey", 27, "Developer"));
-		repository.save(new Employee(2L, 3L, "Kevin Price", 38, "Developer"));		
-		repository.save(new Employee(2L, 3L, "Ian Scott", 34, "Developer"));
-		repository.save(new Employee(2L, 3L, "Andrew Campton", 30, "Manager"));
-		repository.save(new Employee(2L, 4L, "Steve Franklin", 25, "Developer"));
-		repository.save(new Employee(2L, 4L, "Elisabeth Smith", 30, "Developer"));
 	}
 	
 }
