@@ -1,8 +1,7 @@
 package pl.piomin.services.department.controller;
 
+import java.util.Arrays;
 import java.util.List;
-
-import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,20 +28,20 @@ public class DepartmentController {
 	DiscoveryClient discoveryClient;
 	@Autowired
 	DepartmentRepository repository;
-//	@Autowired
+	@Autowired
 	EmployeeClient employeeClient;
 	
 	@Autowired
 	RestTemplate template;
 	
-	@PostConstruct
-	public void init() {
-		LOGGER.info("Services: {}", discoveryClient.getServices());
-		try {
-			template.getForObject("http://employee/department/{departmentId}", Employee.class, "1");
-		} catch (Exception e) {
-			LOGGER.error("Error rest", e);
-		}
+	@GetMapping("/feign")
+	public List<Employee> listFeign() {
+		return Arrays.asList(template.getForObject("http://employee/department/{departmentId}", Employee[].class, "1"));
+	}
+	
+	@GetMapping("/rest")
+	public List<Employee> listRest() {
+		return employeeClient.findByDepartment("1");
 	}
 	
 	@PostMapping("/")

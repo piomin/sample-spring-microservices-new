@@ -3,9 +3,7 @@ spring:
     name: employee
   data:
     mongodb:
-      uri: mongodb://mongodb/${MONGO_DATABASE}
-      password: ${MONGO_PASSWORD}
-      username: ${MONGO_USERNAME}
+      uri: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongodb/${MONGO_DATABASE}
       
 logging:
   pattern: 
