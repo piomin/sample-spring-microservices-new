@@ -25,21 +25,11 @@ public class DepartmentController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentController.class);
 	
 	@Autowired
-	DiscoveryClient discoveryClient;
-	@Autowired
 	DepartmentRepository repository;
 	@Autowired
 	EmployeeClient employeeClient;
 	
-	@Autowired
-	RestTemplate template;
-	
 	@GetMapping("/feign")
-	public List<Employee> listFeign() {
-		return Arrays.asList(template.getForObject("http://employee/department/{departmentId}", Employee[].class, "1"));
-	}
-	
-	@GetMapping("/rest")
 	public List<Employee> listRest() {
 		return employeeClient.findByDepartment("1");
 	}

@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: mongodb
 data:
-  database-name: microservices
+  database-name: admin

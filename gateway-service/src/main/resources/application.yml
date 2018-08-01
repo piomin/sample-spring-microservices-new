@@ -10,10 +10,7 @@ zuul:
   routes:
     department:
       path: /department/**
-      serviceId: department
     employee:
       path: /employee/**
-      serviceId: employee
     organization:
       path: /organization/**
-      serviceId: organization
