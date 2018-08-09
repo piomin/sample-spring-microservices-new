@@ -1,0 +1,29 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.1.RELEASE'
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath 'com.apollographql.apollo:apollo-gradle-plugin:1.0.1-SNAPSHOT'
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+apply plugin: 'com.apollographql.android'
+
+dependencyManagement {
+  imports {
+    mavenBom ':spring-cloud-dependencies:Finchley.SR1'
+  }
+}
+
+dependencies {
+    compile ':spring-cloud-starter-config'
+    compile ':spring-cloud-starter-netflix-eureka-client'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'com.graphql-java:graphql-spring-boot-starter:5.0.2'
+    compile 'com.graphql-java:graphiql-spring-boot-starter:5.0.2'
+    compile 'com.graphql-java:graphiql-java:9.2'
+    compile 'com.graphql-java:graphiql-java-tools:5.2.3'
+}
