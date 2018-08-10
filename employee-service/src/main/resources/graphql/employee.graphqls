@@ -9,7 +9,15 @@ type EmployeeQueries {
 }
 
 type EmployeeMutations {
-  newEmployee(employee: Employee!): Employee
+  newEmployee(employee: EmployeeInput!): Employee
+}
+
+input EmployeeInput {
+  organizationId: Int!
+  departmentId: Int!
+  name: String!
+  age: Int!
+  position: String!
 }
 
 type Employee {
