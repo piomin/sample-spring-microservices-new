@@ -6,6 +6,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
+import okhttp3.OkHttpClient;
 import pl.piomin.services.department.model.Department;
 import pl.piomin.services.department.repository.DepartmentRepository;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -43,6 +44,11 @@ public class DepartmentApplication {
 		repository.add(new Department(2L, "Development"));
 		repository.add(new Department(2L, "Operations"));		
 		return repository;
+	}
+	
+	@Bean
+	OkHttpClient httpClient() {
+		return new OkHttpClient.Builder().build();
 	}
 	
 }
