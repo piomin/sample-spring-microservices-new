@@ -6,10 +6,13 @@ schema {
 type EmployeeQueries {
   employees: [Employee]
   employee(id: ID!): Employee!
+  employeesByOrganization(organizationId: Int!): [Employee]
 }
 
 type EmployeeMutations {
   newEmployee(employee: EmployeeInput!): Employee
+  deleteEmployee(id: ID!) : Boolean
+  updateEmployee(id: ID!, employee: EmployeeInput!): Employee
 }
 
 input EmployeeInput {
@@ -18,6 +21,7 @@ input EmployeeInput {
   name: String!
   age: Int!
   position: String!
+  salary: Int!
 }
 
 type Employee {
@@ -27,4 +31,5 @@ type Employee {
   name: String!
   age: Int!
   position: String!
+  salary: Int!
 }

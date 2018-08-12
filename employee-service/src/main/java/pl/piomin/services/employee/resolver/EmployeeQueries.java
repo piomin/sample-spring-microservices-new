@@ -25,6 +25,11 @@ public class EmployeeQueries implements GraphQLQueryResolver {
 		return repository.findAll();
 	}
 	
+	public List<Employee> employeesByOrganization(Long organizationId) {
+		LOGGER.info("Employee find");
+		return repository.findByOrganization(organizationId);
+	}
+	
 	public Employee employee(Long id) {
 		LOGGER.info("Employee find: id={}", id);
 		return repository.findById(id);

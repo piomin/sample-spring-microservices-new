@@ -8,17 +8,19 @@ public class Employee {
 	private String name;
 	private int age;
 	private String position;
+	private int salary;
 
 	public Employee() {
 
 	}
 	
-	public Employee(Long organizationId, Long departmentId, String name, int age, String position) {
+	public Employee(Long organizationId, Long departmentId, String name, int age, String position, int salary) {
 		this.organizationId = organizationId;
 		this.departmentId = departmentId;
 		this.name = name;
 		this.age = age;
 		this.position = position;
+		this.salary = salary;
 	}
 
 	public Long getId() {
@@ -67,6 +69,14 @@ public class Employee {
 
 	public void setPosition(String position) {
 		this.position = position;
+	}
+
+	public int getSalary() {
+		return salary;
+	}
+
+	public void setSalary(int salary) {
+		this.salary = salary;
 	}
 
 	@Override
