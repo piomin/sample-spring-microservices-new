@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.apollographql.apollo.ApolloCall.Callback;
 import com.apollographql.apollo.ApolloClient;
@@ -21,6 +22,7 @@ import com.netflix.discovery.shared.Application;
 
 import pl.piomin.services.department.model.Employee;
 
+@Component
 public class EmployeeClient {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(EmployeeClient.class);
@@ -39,7 +41,7 @@ public class EmployeeClient {
 		InstanceInfo ii = app.getInstances().get(r.nextInt(app.size()));
 		ApolloClient client = ApolloClient.builder().serverUrl(String.format(SERVER_URL, ii.getPort())).build();
 		CountDownLatch lock = new CountDownLatch(1);
-		client.query(EmployeesQuery.builder().build()).enqueue(new Callback<EmployeesQuery.Data>() {
+		client.query(EmployeesByDepartmentQuery.builder().departmentId(departmentId.intValue()).build()).enqueue(new Callback<EmployeesByDepartmentQuery.Data>() {
 
 			@Override
 			public void onFailure(ApolloException ex) {
@@ -48,9 +50,9 @@ public class EmployeeClient {
 			}
 
 			@Override
-			public void onResponse(Response<EmployeesQuery.Data> res) {
+			public void onResponse(Response<EmployeesByDepartmentQuery.Data> res) {
 				LOGGER.info("Res: {}", res);
-				employees.addAll(res.data().employees().stream().map(emp -> new Employee(emp.name(), emp.age(), null)).collect(Collectors.toList()));
+				employees.addAll(res.data().employeesByDepartment().stream().map(emp -> new Employee(Long.valueOf(emp.id()), emp.name(), emp.position(), emp.salary())).collect(Collectors.toList()));
 				lock.countDown();
 			}
 

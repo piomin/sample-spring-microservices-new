@@ -36,13 +36,13 @@ public class DepartmentQueries implements GraphQLQueryResolver {
 	public List<Department> departmentsByOrganizationWithEmployees(Long organizationId) {
 		LOGGER.info("Departments find: organizationId={}", organizationId);
 		List<Department> departments = repository.findByOrganization(organizationId);
-		departments.forEach(d -> {
+		for (int i = 0; i < departments.size(); i++) {
 			try {
-				d.setEmployees(employeeClient.findByDepartment(d.getId()));
+				departments.get(i).setEmployees(employeeClient.findByDepartment(departments.get(i).getId()));
 			} catch (InterruptedException e) {
 				LOGGER.error("Error calling employee-service", e);
 			}
-		});
+		}
 		return departments;
 	}
 	

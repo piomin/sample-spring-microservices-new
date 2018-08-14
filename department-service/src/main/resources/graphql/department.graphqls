@@ -7,7 +7,7 @@ type DepartmentQueries {
   departments: [Department]
   department(id: ID!): Department!
   departmentsByOrganization(organizationId: Int!): [Department]
-  departmentsByOrganizationWithEmployees(departmentId: Int!): [Department]
+  departmentsByOrganizationWithEmployees(organizationId: Int!): [Department]
 }
 
 type DepartmentMutations {
@@ -25,4 +25,12 @@ type Department {
   id: ID!
   organizationId: Int!
   name: String!
+  employees: [Employee]
+}
+
+type Employee {
+  id: ID!
+  name: String!
+  position: String!
+  salary: Int!
 }
