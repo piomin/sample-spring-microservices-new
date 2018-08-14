@@ -1,0 +1,28 @@
+schema {
+  query: DepartmentQueries
+  mutation: DepartmentMutations
+}
+
+type DepartmentQueries {
+  departments: [Department]
+  department(id: ID!): Department!
+  departmentsByOrganization(organizationId: Int!): [Department]
+  departmentsByOrganizationWithEmployees(departmentId: Int!): [Department]
+}
+
+type DepartmentMutations {
+  newDepartment(department: DepartmentInput!): Department
+  deleteDepartment(id: ID!) : Boolean
+  updateDepartment(id: ID!, department: DepartmentInput!): Department
+}
+
+input DepartmentInput {
+  organizationId: Int!
+  name: String!
+}
+
+type Department {
+  id: ID!
+  organizationId: Int!
+  name: String!
+}

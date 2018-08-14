@@ -33,7 +33,7 @@ public class EmployeeClient {
 	@Autowired
 	private EurekaClient discoveryClient;
 	
-	List<Employee> findByDepartment(Long departmentId) throws InterruptedException {
+	public List<Employee> findByDepartment(Long departmentId) throws InterruptedException {
 		List<Employee> employees = new ArrayList<>();
 		Application app = discoveryClient.getApplication(SERVICE_NAME);
 		InstanceInfo ii = app.getInstances().get(r.nextInt(app.size()));

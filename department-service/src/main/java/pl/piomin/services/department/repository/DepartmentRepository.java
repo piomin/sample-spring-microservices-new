@@ -33,4 +33,15 @@ public class DepartmentRepository {
 		return departments.stream().filter(a -> a.getOrganizationId().equals(organizationId)).collect(Collectors.toList());
 	}
 	
+	public boolean delete(Long id) {
+		return departments.removeIf(it -> it.getId() == id.longValue());
+	}
+	
+	public Department update(Long id, Department department) {
+		department.setId(id);
+		int index = departments.indexOf(department);
+		departments.set(index, department);
+		return department;
+	}
+	
 }
