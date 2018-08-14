@@ -51,6 +51,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.graphql-java</groupId>
+			<artifactId>voyager-spring-boot-starter</artifactId>
+			<version>5.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.graphql-java</groupId>
 			<artifactId>graphql-java</artifactId>
 			<version>9.2</version>
 		</dependency>

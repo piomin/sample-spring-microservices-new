@@ -24,12 +24,13 @@ public class EmployeeMutations implements GraphQLMutationResolver {
 	}
 	
 	public boolean deleteEmployee(Long id) {
-		return true;
+		LOGGER.info("Employee delete: id={}", id);
+		return repository.delete(id);
 	}
 	
 	public Employee updateEmployee(Long id, Employee employee) {
-		LOGGER.info("Employee add: id={}, employee={}", id, employee);
-		return repository.add(employee);
+		LOGGER.info("Employee update: id={}, employee={}", id, employee);
+		return repository.update(id, employee);
 	}
 	
 }

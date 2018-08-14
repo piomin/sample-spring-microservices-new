@@ -37,4 +37,15 @@ public class EmployeeRepository {
 		return employees.stream().filter(a -> a.getOrganizationId().equals(organizationId)).collect(Collectors.toList());
 	}
 	
+	public boolean delete(Long id) {
+		return employees.removeIf(it -> it.getId() == id.longValue());
+	}
+	
+	public Employee update(Long id, Employee employee) {
+		employee.setId(id);
+		int index = employees.indexOf(employee);
+		employees.set(index, employee);
+		return employee;
+	}
+	
 }
