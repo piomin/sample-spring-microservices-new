@@ -5,8 +5,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.stereotype.Repository;
 import pl.piomin.services.employee.model.Employee;
 
+@RefreshScope
+@Repository
+@ConfigurationProperties(prefix = "repository")
 public class EmployeeRepository {
 
 	private List<Employee> employees = new ArrayList<>();
@@ -36,5 +42,13 @@ public class EmployeeRepository {
 	public List<Employee> findByOrganization(Long organizationId) {
 		return employees.stream().filter(a -> a.getOrganizationId().equals(organizationId)).collect(Collectors.toList());
 	}
-	
+
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
+	}
+
 }
