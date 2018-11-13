@@ -2,5 +2,8 @@ spring:
   application:
     name: employee-service
   cloud:
-    config:
-      uri: http://localhost:8088
+    nacos:
+      config:
+        server-addr: localhost:8848
+      discovery:
+        server-addr: localhost:8848
