@@ -2,5 +2,20 @@ spring:
   application:
     name: proxy-service
   cloud:
-    config:
-      uri: http://localhost:8088
+    nacos:
+      config:
+        server-addr: localhost:8848
+      discovery:
+        server-addr: localhost:8848
+
+zuul:
+  routes:
+    department:
+      path: /department/**
+      serviceId: department-service
+    employee:
+      path: /employee/**
+      serviceId: employee-service
+    organization:
+      path: /organization/**
+      serviceId: organization-service
