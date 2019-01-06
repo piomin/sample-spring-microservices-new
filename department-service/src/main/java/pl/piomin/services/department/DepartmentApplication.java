@@ -15,11 +15,9 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-@EnableDiscoveryClient
 @EnableFeignClients
 @EnableMongoRepositories
 @EnableSwagger2
-//@RibbonClient(name = "employee")
 public class DepartmentApplication {
 	
 	public static void main(String[] args) {
@@ -35,11 +33,5 @@ public class DepartmentApplication {
 				.build()
 				.apiInfo(new ApiInfoBuilder().version("1.0").title("Department API").description("Documentation Department API v1.0").build());
 	}
-	
-//	@Bean
-//	@LoadBalanced
-//	RestTemplate restTemplate() {
-//		return new RestTemplate();
-//	}
 	
 }
