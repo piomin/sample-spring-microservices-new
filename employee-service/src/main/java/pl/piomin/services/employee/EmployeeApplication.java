@@ -1,6 +1,7 @@
 package pl.piomin.services.employee;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -20,6 +21,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class EmployeeApplication {
 
+	@Value("${VERSION}")
+	String version;
 	@Autowired
 	EmployeeRepository repository;
 	
@@ -34,7 +37,7 @@ public class EmployeeApplication {
 					.apis(RequestHandlerSelectors.basePackage("pl.piomin.services.employee.controller"))
 					.paths(PathSelectors.any())
 				.build()
-				.apiInfo(new ApiInfoBuilder().version("1.0").title("Employee API").description("Documentation Employee API v1.0").build());
+				.apiInfo(new ApiInfoBuilder().version(version).title("Employee API").description("Documentation Employee API v1.0").build());
 	}
 	
 }
