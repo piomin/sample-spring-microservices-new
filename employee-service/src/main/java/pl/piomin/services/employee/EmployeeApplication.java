@@ -1,14 +1,10 @@
 package pl.piomin.services.employee;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-
-import pl.piomin.services.employee.repository.EmployeeRepository;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -23,8 +19,6 @@ public class EmployeeApplication {
 
 	@Value("${VERSION}")
 	String version;
-	@Autowired
-	EmployeeRepository repository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(EmployeeApplication.class, args);
