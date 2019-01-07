@@ -10,6 +10,7 @@ import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger.web.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
@@ -33,5 +34,10 @@ public class EmployeeApplication {
 				.build()
 				.apiInfo(new ApiInfoBuilder().version(version).title("Employee API").description("Documentation Employee API v1.0").build());
 	}
-	
+
+	@Bean
+	UiConfiguration uiConfig() {
+		return new UiConfiguration(Boolean.TRUE, Boolean.FALSE, 1, 1, ModelRendering.MODEL, Boolean.FALSE, DocExpansion.LIST, Boolean.FALSE, null, OperationsSorter.ALPHA, Boolean.FALSE, TagsSorter.ALPHA, UiConfiguration.Constants.DEFAULT_SUBMIT_METHODS, null);
+	}
+
 }
