@@ -2,7 +2,7 @@ package pl.piomin.services.department.model;
 
 public class Employee {
 
-	private Long id;
+	private String id;
 	private String name;
 	private int age;
 	private String position;
@@ -17,11 +17,11 @@ public class Employee {
 		this.position = position;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

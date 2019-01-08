@@ -30,7 +30,7 @@ public class DepartmentApplication {
 	}
 
 	@Bean
-	public Docket swaggerPersonApi10() {
+	public Docket swaggerApi() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
 					.apis(RequestHandlerSelectors.basePackage("pl.piomin.services.department.controller"))
