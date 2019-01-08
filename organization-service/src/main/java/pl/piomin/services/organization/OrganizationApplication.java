@@ -1,5 +1,6 @@
 package pl.piomin.services.organization;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -18,7 +19,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableMongoRepositories
 @EnableSwagger2
 public class OrganizationApplication {
-	
+
+	@Value("${VERSION}")
+	String version;
+
 	public static void main(String[] args) {
 		SpringApplication.run(OrganizationApplication.class, args);
 	}
@@ -30,7 +34,7 @@ public class OrganizationApplication {
 					.apis(RequestHandlerSelectors.basePackage("pl.piomin.services.organization.controller"))
 					.paths(PathSelectors.any())
 				.build()
-				.apiInfo(new ApiInfoBuilder().version("1.0").title("Organization API").description("Documentation Organization API v1.0").build());
+				.apiInfo(new ApiInfoBuilder().version(version).title("Organization API").description("Documentation Organization API v" + version).build());
 	}
 
 	@Bean

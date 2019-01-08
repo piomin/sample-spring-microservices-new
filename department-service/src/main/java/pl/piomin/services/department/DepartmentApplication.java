@@ -1,5 +1,6 @@
 package pl.piomin.services.department;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -20,7 +21,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableMongoRepositories
 @EnableSwagger2
 public class DepartmentApplication {
-	
+
+	@Value("${VERSION}")
+	String version;
+
 	public static void main(String[] args) {
 		SpringApplication.run(DepartmentApplication.class, args);
 	}
@@ -32,7 +36,7 @@ public class DepartmentApplication {
 					.apis(RequestHandlerSelectors.basePackage("pl.piomin.services.department.controller"))
 					.paths(PathSelectors.any())
 				.build()
-				.apiInfo(new ApiInfoBuilder().version("1.0").title("Department API").description("Documentation Department API v1.0").build());
+				.apiInfo(new ApiInfoBuilder().version(version).title("Department API").description("Documentation Department API v" + version).build());
 	}
 
 	@Bean
