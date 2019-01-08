@@ -8,6 +8,6 @@ import pl.piomin.services.department.model.Department;
 
 public interface DepartmentRepository extends CrudRepository<Department, String> {
 
-	List<Department> findByOrganizationId(Long organizationId);
+	List<Department> findByOrganizationId(String organizationId);
 	
 }

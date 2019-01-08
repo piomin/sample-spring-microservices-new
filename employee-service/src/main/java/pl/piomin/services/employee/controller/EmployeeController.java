@@ -38,13 +38,13 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/department/{departmentId}")
-	public List<Employee> findByDepartment(@PathVariable("departmentId") Long departmentId) {
+	public List<Employee> findByDepartment(@PathVariable("departmentId") String departmentId) {
 		LOGGER.info("Employee find: departmentId={}", departmentId);
 		return repository.findByDepartmentId(departmentId);
 	}
 	
 	@GetMapping("/organization/{organizationId}")
-	public List<Employee> findByOrganization(@PathVariable("organizationId") Long organizationId) {
+	public List<Employee> findByOrganization(@PathVariable("organizationId") String organizationId) {
 		LOGGER.info("Employee find: organizationId={}", organizationId);
 		return repository.findByOrganizationId(organizationId);
 	}
