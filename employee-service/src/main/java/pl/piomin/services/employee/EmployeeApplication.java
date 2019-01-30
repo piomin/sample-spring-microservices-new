@@ -1,5 +1,7 @@
 package pl.piomin.services.employee;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,16 +15,29 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger.web.*;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import javax.annotation.PostConstruct;
+import java.util.Map;
+
 @SpringBootApplication
 @EnableMongoRepositories
 @EnableSwagger2
 public class EmployeeApplication {
+
+	private static final Logger LOG = LoggerFactory.getLogger(EmployeeApplication.class);
 
 	@Value("${VERSION}")
 	String version;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(EmployeeApplication.class, args);
+	}
+
+	@PostConstruct
+	public void envs() {
+		Map<String, String> env = System.getenv();
+		for (String envName : env.keySet()) {
+			LOG.info("{}={}", envName, env.get(envName));
+		}
 	}
 
 	@Bean
