@@ -8,3 +8,22 @@ Currently you may find here some examples of microservices implementation using 
 2. Using Spring Cloud Alibaba **Nacos** as a discovery and configuration server, **Zuul** and **OpenFeign**. The example is available in the branch [alibaba](https://github.com/piomin/sample-spring-microservices-new/tree/alibaba). A detailed guide may be find in the following article: [Microservices with Spring Cloud Alibaba](https://piotrminkowski.wordpress.com/2018/11/15/microservices-with-spring-cloud-alibaba/)
 3. Using Spring Cloud with Spring Boot support for **GraphQL** for building microservices, **Apollo** for inter-service communication and **Eureka** as a discovery server. The example is available in the branch [graphql](https://github.com/piomin/sample-spring-microservices-new/tree/graphql). A detailed guide may be find in the following article: [GraphQL – The Future of Microservices?](https://piotrminkowski.wordpress.com/2018/08/16/graphql-the-future-of-microservices/)
 4. Using Spring Boot and partially Spring Cloud for building microservices deployed on **OpenShift** with **Source-2-Image** mechanism. The example is available in the branch [openshift](https://github.com/piomin/sample-spring-microservices-new/tree/openshift). A detailed guide may be find in the following article: [Running Java Microservices on OpenShift using Source-2-Image](https://piotrminkowski.wordpress.com/2019/01/08/running-java-microservices-on-openshift-using-source-2-image/)
+
+### Usage
+
+In the most cases you need to have Maven and JDK8+. In the fourth example with OpenShift you will have to run **Minishift** on your machine. The best way to run the sample applications is with IDEs like IntelliJ IDEA or Eclipse.  
+
+## Architecture
+
+Our sample microservices-based system consists of the following modules:
+- **gateway-service** - a module that Spring Cloud Netflix Zuul for running Spring Boot application that acts as a proxy/gateway in our architecture.
+- **config-service** - a module that uses Spring Cloud Config Server for running configuration server in the `native` mode. The configuration files are placed on the classpath.
+- **discovery-service** - a module that depending on the example it uses Spring Cloud Netflix Eureka or Spring Cloud Netlix Alibaba Nacos as an embedded discovery server.
+- **employee-service** - a module containing the first of our sample microservices that allows to perform CRUD operation on in-memory repository of employees
+- **department-service** - a module containing the second of our sample microservices that allows to perform CRUD operation on in-memory repository of departments. It communicates with employee-service. 
+- **organization-service** - a module containing the third of our sample microservices that allows to perform CRUD operation on in-memory repository of organizations. It communicates with both employee-service and organization-service.
+
+The following picture illustrates the architecture described above.
+
+<img src="https://piotrminkowski.files.wordpress.com/2018/04/spring-cloud-1.png" title="Architecture"><br/>
+
