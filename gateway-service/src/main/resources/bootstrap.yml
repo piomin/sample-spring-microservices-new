@@ -4,3 +4,7 @@ spring:
   cloud:
     config:
       uri: http://localhost:8088
+
+#springdoc:
+#  api-docs:
+#    path:
