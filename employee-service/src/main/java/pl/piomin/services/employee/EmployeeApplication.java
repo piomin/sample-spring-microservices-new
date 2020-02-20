@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 import pl.piomin.services.employee.model.Employee;
 import pl.piomin.services.employee.repository.EmployeeRepository;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -17,6 +19,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableSwagger2
+@OpenAPIDefinition(info =
+	@Info(title = "Employee API", version = "1.0", description = "Documentation Employee API v1.0")
+)
 public class EmployeeApplication {
 
 	public static void main(String[] args) {

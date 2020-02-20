@@ -6,6 +6,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 import pl.piomin.services.organization.model.Organization;
 import pl.piomin.services.organization.repository.OrganizationRepository;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -19,6 +21,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableSwagger2
+@OpenAPIDefinition(info =
+	@Info(title = "Organization API", version = "1.0", description = "Documentation Organization API v1.0")
+)
 public class OrganizationApplication {
 
 	public static void main(String[] args) {
