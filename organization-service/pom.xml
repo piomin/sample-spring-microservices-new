@@ -7,7 +7,7 @@
 	</parent>
 	<artifactId>organization-service</artifactId>
 	<groupId>pl.piomin.services</groupId>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.1</version>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -64,6 +64,11 @@
 			<artifactId>springdoc-openapi-webmvc-core</artifactId>
 			<version>1.2.32</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -71,6 +76,25 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.5</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
