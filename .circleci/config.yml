@@ -10,6 +10,11 @@ jobs:
           name: Analyze on SonarCloud
           command: mvn verify sonar:sonar
 
+executors:
+  j17:
+    docker:
+      - image: 'cimg/openjdk:17.0'
+
 orbs:
   maven: circleci/maven@1.2.0
 
