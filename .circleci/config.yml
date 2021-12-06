@@ -21,6 +21,10 @@ orbs:
 workflows:
   maven_test:
     jobs:
-      - maven/test # checkout, build, test, and upload test results
+      - maven/test:
+          matrix:
+            parameters:
+              executor:
+                - j17
       - build:
           context: SonarCloud
