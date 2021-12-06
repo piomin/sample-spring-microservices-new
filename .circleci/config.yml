@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: 'circleci/openjdk:11-jdk'
+      - image: 'cimg/openjdk:17.0.0'
     steps:
       - checkout
       - run:
@@ -11,7 +11,7 @@ jobs:
           command: mvn verify sonar:sonar
 
 orbs:
-  maven: circleci/maven@0.0.12
+  maven: circleci/maven@1.2.0
 
 workflows:
   maven_test:
