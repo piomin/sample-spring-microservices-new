@@ -1,10 +1,9 @@
 package pl.piomin.services.organization.repository;
 
+import pl.piomin.services.organization.model.Organization;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-import pl.piomin.services.organization.model.Organization;
 
 public class OrganizationRepository {
 
@@ -17,11 +16,10 @@ public class OrganizationRepository {
 	}
 	
 	public Organization findById(Long id) {
-		Optional<Organization> organization = organizations.stream().filter(a -> a.getId().equals(id)).findFirst();
-		if (organization.isPresent())
-			return organization.get();
-		else
-			return null;
+		return organizations.stream()
+				.filter(a -> a.getId().equals(id))
+				.findFirst()
+				.orElseThrow();
 	}
 	
 	public List<Organization> findAll() {

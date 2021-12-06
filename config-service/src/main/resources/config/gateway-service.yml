@@ -41,3 +41,13 @@ spring:
         - Path=/v3/api-docs/**
         filters:
         - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+
+springdoc:
+  swagger-ui:
+    urls:
+      - name: employee
+        url: /v3/api-docs/employee
+      - name: department
+        url: /v3/api-docs/department
+      - name: organization
+        url: /v3/api-docs/organization
