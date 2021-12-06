@@ -22,9 +22,6 @@ workflows:
   maven_test:
     jobs:
       - maven/test:
-          matrix:
-            parameters:
-              executor:
-                - j17
+          executor: j17
       - build:
           context: SonarCloud
