@@ -55,4 +55,4 @@ stages:
         steps:
           - task: CmdLine@2
             inputs:
-              script: 'echo Hello world'
+              script: 'echo deploying'
