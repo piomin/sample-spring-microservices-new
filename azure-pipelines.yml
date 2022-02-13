@@ -41,12 +41,12 @@ stages:
             displayName: SonarQube
             continueOnError: true
           - task: Docker@2
-            displayName: Docker build
+            displayName: Docker build of config-service
             inputs:
               containerRegistry: 'Docker Hub'
-              repository: 'suchen2008/spring-microservices-organization-sample'
+              repository: 'suchen2008/spring-microservices-organization-config'
               command: 'buildAndPush'
-              Dockerfile: '**/Dockerfile'
+              Dockerfile: 'config-service/Dockerfile'
   - stage: Deploy
     displayName: Deploy
     jobs:
