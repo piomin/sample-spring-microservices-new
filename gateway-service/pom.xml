@@ -41,7 +41,7 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-webflux-ui</artifactId>
-			<version>1.5.13</version>
+			<version>1.6.14</version>
 		</dependency>
 	</dependencies>
 
