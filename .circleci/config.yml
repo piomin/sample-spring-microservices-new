@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: 'cimg/openjdk:17.0'
+      - image: 'cimg/openjdk:19.0'
     steps:
       - checkout
       - run:
@@ -13,7 +13,7 @@ jobs:
 executors:
   j17:
     docker:
-      - image: 'cimg/openjdk:17.0'
+      - image: 'cimg/openjdk:19.0'
 
 orbs:
   maven: circleci/maven@1.3.0
