@@ -52,7 +52,7 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-webmvc-core</artifactId>
-			<version>1.5.13</version>
+			<version>1.6.14</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
