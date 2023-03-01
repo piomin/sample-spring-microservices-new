@@ -28,13 +28,13 @@ public class OrganizationController {
 	@Autowired
 	EmployeeClient employeeClient;
 	
-	@PostMapping
+	@PostMapping("/")
 	public Organization add(@RequestBody Organization organization) {
 		LOGGER.info("Organization add: {}", organization);
 		return repository.add(organization);
 	}
 	
-	@GetMapping
+	@GetMapping("/")
 	public List<Organization> findAll() {
 		LOGGER.info("Organization find");
 		return repository.findAll();
