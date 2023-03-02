@@ -1,0 +1,81 @@
+version: "3.7"
+services:
+  config-service:
+    image: piomin/config-service:1.1-SNAPSHOT
+    ports:
+      - "8088:8088"
+    healthcheck:
+      test: ls -la
+      interval: 4s
+      timeout: 2s
+      retries: 3
+  discovery-service:
+    image: piomin/discovery-service:1.1-SNAPSHOT
+    ports:
+      - "8061:8061"
+    depends_on:
+      config-service:
+        condition: service_healthy
+    links:
+      - config-service
+    healthcheck:
+      test: ls -la
+      interval: 4s
+      timeout: 2s
+      retries: 3
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+  employee-service:
+    image: piomin/employee-service:1.2-SNAPSHOT
+    ports:
+      - "8080"
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+    links:
+      - config-service
+      - discovery-service
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+  department-service:
+    image: piomin/department-service:1.2-SNAPSHOT
+    ports:
+      - "8080"
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+    links:
+      - config-service
+      - discovery-service
+      - employee-service
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+  organization-service:
+    image: piomin/organization-service:1.2-SNAPSHOT
+    ports:
+      - "8080"
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+    links:
+      - config-service
+      - discovery-service
+      - employee-service
+      - department-service
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+  gateway-service:
+    image: piomin/gateway-service:1.1-SNAPSHOT
+    ports:
+      - "8060:8060"
+    depends_on:
+      discovery-service:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    links:
+      - config-service
+      - discovery-service
+      - employee-service
+      - department-service
+      - organization-service

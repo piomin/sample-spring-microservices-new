@@ -1,4 +1,10 @@
 spring:
+  config:
+    import: "optional:configserver:http://config-service:8088"
+    activate:
+      on-profile: docker
+---
+spring:
   application:
     name: department-service
   config:
