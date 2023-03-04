@@ -1,12 +1,18 @@
 version: "3.7"
 services:
+  zipkin:
+    container_name: zipkin
+    image: openzipkin/zipkin
+    extra_hosts: [ 'host.docker.internal:host-gateway' ]
+    ports:
+      - "9411:9411"
   config-service:
     image: piomin/config-service:1.1-SNAPSHOT
     ports:
       - "8088:8088"
     healthcheck:
       test: ls -la
-      interval: 4s
+      interval: 5s
       timeout: 2s
       retries: 3
   discovery-service:
@@ -35,6 +41,7 @@ services:
     links:
       - config-service
       - discovery-service
+      - zipkin
     environment:
       SPRING_PROFILES_ACTIVE: docker
   department-service:
@@ -48,6 +55,7 @@ services:
       - config-service
       - discovery-service
       - employee-service
+      - zipkin
     environment:
       SPRING_PROFILES_ACTIVE: docker
   organization-service:
@@ -62,6 +70,7 @@ services:
       - discovery-service
       - employee-service
       - department-service
+      - zipkin
     environment:
       SPRING_PROFILES_ACTIVE: docker
   gateway-service:
@@ -79,3 +88,4 @@ services:
       - employee-service
       - department-service
       - organization-service
+      - zipkin

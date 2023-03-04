@@ -12,3 +12,16 @@ logging:
 
 springdoc:
   packagesToScan: pl.piomin.services.department
+
+spring:
+  output:
+    ansi:
+      enabled: always
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans

@@ -11,6 +11,9 @@ logging:
     console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
               
 spring:
+  output:
+    ansi:
+      enabled: always
   cloud:
     gateway:
       discovery:
@@ -51,3 +54,8 @@ springdoc:
         url: /v3/api-docs/department
       - name: organization
         url: /v3/api-docs/organization
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
