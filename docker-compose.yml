@@ -11,7 +11,7 @@ services:
     ports:
       - "8088:8088"
     healthcheck:
-      test: ls -la
+      test: curl --fail http://localhost:8088/employee/docker  || exit 1
       interval: 5s
       timeout: 2s
       retries: 3

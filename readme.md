@@ -19,6 +19,16 @@ Currently you may find here some examples of microservices implementation using 
 
 ### Usage
 
+Build the apps with images (we need ji for `config-service` since it contains `curl`):
+```shell
+$ mvn clean package -Pbuild-image jib:dockerBuild
+```
+
+Then run all the containers with `docker-compose`:
+```shell
+$ docker-compose up
+```
+
 In the most cases you need to have Maven and JDK8+. In the fourth example with OpenShift you will have to run **Minishift** on your machine. The best way to run the sample applications is with IDEs like IntelliJ IDEA or Eclipse.  
 
 ## Architecture
