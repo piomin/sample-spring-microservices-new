@@ -25,7 +25,7 @@ services:
     links:
       - config-service
     healthcheck:
-      test: ls -la
+      test: curl --fail http://localhost:8061/eureka/v2/apps || exit 1
       interval: 4s
       timeout: 2s
       retries: 3

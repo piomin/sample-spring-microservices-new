@@ -57,6 +57,14 @@
 								<image>piomin/${project.artifactId}:${project.version}</image>
 							</to>
 						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>dockerBuild</goal>
+								</goals>
+								<phase>package</phase>
+							</execution>
+						</executions>
 					</plugin>
 <!--					<plugin>-->
 <!--						<groupId>org.springframework.boot</groupId>-->
