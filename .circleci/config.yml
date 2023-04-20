@@ -11,7 +11,7 @@ jobs:
           command: mvn verify sonar:sonar
 
 executors:
-  j17:
+  jdk:
     docker:
       - image: 'cimg/openjdk:19.0'
 
@@ -22,6 +22,6 @@ workflows:
   maven_test:
     jobs:
       - maven/test:
-          executor: j17
+          executor: jdk
       - build:
           context: SonarCloud
