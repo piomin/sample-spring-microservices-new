@@ -1,71 +1,71 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>pl.piomin.services</groupId>
-		<artifactId>sample-spring-microservices-new</artifactId>
-		<version>1.1-SNAPSHOT</version>
-	</parent>
-	<artifactId>discovery-service</artifactId>
-	<version>1.1-SNAPSHOT</version>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>pl.piomin.services</groupId>
+        <artifactId>sample-spring-microservices-new</artifactId>
+        <version>1.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>discovery-service</artifactId>
+    <version>1.1-SNAPSHOT</version>
 
-	<properties>
-		<sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
-	</properties>
-	
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-config</artifactId>
-		</dependency>
-	</dependencies>
+    <properties>
+        <sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
+    </properties>
 
-	<profiles>
-		<profile>
-			<id>build-image</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>com.google.cloud.tools</groupId>
-						<artifactId>jib-maven-plugin</artifactId>
-						<version>3.3.2</version>
-						<configuration>
-							<to>
-								<image>piomin/${project.artifactId}:${project.version}</image>
-							</to>
-						</configuration>
-						<executions>
-							<execution>
-								<goals>
-									<goal>dockerBuild</goal>
-								</goals>
-								<phase>package</phase>
-							</execution>
-						</executions>
-					</plugin>
-<!--					<plugin>-->
-<!--						<groupId>org.springframework.boot</groupId>-->
-<!--						<artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--						<configuration>-->
-<!--							<image>-->
-<!--								<name>piomin/${project.artifactId}:${project.version}</name>-->
-<!--							</image>-->
-<!--						</configuration>-->
-<!--						<executions>-->
-<!--							<execution>-->
-<!--								<goals>-->
-<!--									<goal>build-image</goal>-->
-<!--								</goals>-->
-<!--							</execution>-->
-<!--						</executions>-->
-<!--					</plugin>-->
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>build-image</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.google.cloud.tools</groupId>
+                        <artifactId>jib-maven-plugin</artifactId>
+                        <version>3.3.2</version>
+                        <configuration>
+                            <to>
+                                <image>piomin/${project.artifactId}:${project.version}</image>
+                            </to>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>dockerBuild</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!--					<plugin>-->
+                    <!--						<groupId>org.springframework.boot</groupId>-->
+                    <!--						<artifactId>spring-boot-maven-plugin</artifactId>-->
+                    <!--						<configuration>-->
+                    <!--							<image>-->
+                    <!--								<name>piomin/${project.artifactId}:${project.version}</name>-->
+                    <!--							</image>-->
+                    <!--						</configuration>-->
+                    <!--						<executions>-->
+                    <!--							<execution>-->
+                    <!--								<goals>-->
+                    <!--									<goal>build-image</goal>-->
+                    <!--								</goals>-->
+                    <!--							</execution>-->
+                    <!--						</executions>-->
+                    <!--					</plugin>-->
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
