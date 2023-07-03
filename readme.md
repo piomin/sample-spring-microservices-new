@@ -22,7 +22,7 @@ Currently you may find here some examples of microservices implementation using 
 
 Build the apps with images (we need ji for `config-service` since it contains `curl`):
 ```shell
-$ mvn clean package -Pbuild-image jib:dockerBuild
+$ mvn clean package -Pbuild-image
 ```
 
 Then run all the containers with `docker-compose`:
