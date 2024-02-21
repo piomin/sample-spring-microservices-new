@@ -39,6 +39,9 @@
                         <artifactId>jib-maven-plugin</artifactId>
                         <version>3.4.0</version>
                         <configuration>
+                            <from>
+                                <image>eclipse-temurin:21-jdk</image>
+                            </from>
                             <to>
                                 <image>piomin/${project.artifactId}:${project.version}</image>
                             </to>
