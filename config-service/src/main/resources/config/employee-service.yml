@@ -1,10 +1,13 @@
 server:
   port: 0
+  forward-headers-strategy: framework
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8061/eureka/
+  instance:
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
       
 logging:
   pattern:
@@ -12,6 +15,11 @@ logging:
 
 springdoc:
   packagesToScan: pl.piomin.services.employee
+  cache:
+    disabled: true
+  version: '@springdoc.version@'
+  api-docs:
+    version: openapi_3_1
 
 spring:
   output:

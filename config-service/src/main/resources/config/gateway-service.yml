@@ -1,5 +1,6 @@
 server:
   port: 8060
+  forward-headers-strategy: framework
 
 eureka:
   client:
@@ -46,14 +47,13 @@ spring:
         - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
 
 springdoc:
+  cache:
+    disabled: true
+  version: '@springdoc.version@'
   swagger-ui:
-    urls:
-      - name: employee
-        url: /v3/api-docs/employee
-      - name: department
-        url: /v3/api-docs/department
-      - name: organization
-        url: /v3/api-docs/organization
+    use-root-path: true
+  api-docs:
+    version: openapi_3_1
 
 management:
   tracing:
