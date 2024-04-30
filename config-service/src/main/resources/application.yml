@@ -1,5 +1,13 @@
 server:
   port: 8088
+
 spring:
   profiles:
     active: native
+  output:
+    ansi:
+      enabled: always
+
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){blue} %clr(${LOG_LEVEL_PATTERN:-%5p}) %m%n"
