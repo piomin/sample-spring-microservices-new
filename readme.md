@@ -10,6 +10,7 @@
 In this project I'm demonstrating you the most interesting features of [Spring Cloud Project](https://spring.io/projects/spring-cloud) for building microservice-based architecture.
 
 -----
+Kim's Fork
 
 I'm publishing on my blog and maintaining example repositories just as a hobby. But if you feel it's worth donating:
 
