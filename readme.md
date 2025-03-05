@@ -37,6 +37,43 @@ Then run all the containers with `docker-compose`:
 $ docker-compose up
 ```
 
+#### Run Locally
+
+To run locally. Microservices are exposed on dynamic ports, so you can safely run them all on the same workstation.
+
+You can run Zipkin. However, it is not necessary:
+```shell
+docker run -d --name zipkin openzipkin/zipkin -p 9411:9411
+```
+
+Begin with `config-service`:
+```shell
+cd config-service
+mvn spring-boot:run
+```
+
+Then, go to `discovery-service`:
+```shell
+cd config-service
+mvn spring-boot:run
+```
+
+Then, go run three microservices: `employee-service`, `department-service`, and `organization-service`, e.g.:
+```shell
+cd employee-service
+mvn spring-boot:run
+```
+
+Finally, run `gateway-service`:
+```shell
+cd gateway-service
+mvn spring-boot:run
+```
+
+By default, Eureka is running on `8061` port, and gateway is exposed under `8060` port.\
+You can access global Swagger UI: http://localhost:8060/swagger-ui.html and switch between services. More details in the articles above.
+
+
 In the most cases you need to have Maven and JDK8+. In the fourth example with OpenShift you will have to run **Minishift** on your machine. The best way to run the sample applications is with IDEs like IntelliJ IDEA or Eclipse.  
 
 ## Architecture
