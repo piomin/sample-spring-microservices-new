@@ -17,7 +17,7 @@
     <properties>
         <java.version>25</java.version>
         <spring-cloud.version>2025.1.0</spring-cloud.version>
-        <spring-openai-mvc.version>2.8.14</spring-openai-mvc.version>
+        <spring-openai-mvc.version>3.0.0</spring-openai-mvc.version>
         <spring-openai-flux.version>2.8.14</spring-openai-flux.version>
         <sonar.projectKey>piomin_sample-spring-microservices-new</sonar.projectKey>
         <sonar.organization>piomin</sonar.organization>
