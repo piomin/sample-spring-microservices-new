@@ -1,16 +1,18 @@
 package pl.piomin.services.department;
 
 import org.instancio.Instancio;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.web.servlet.client.RestTestClient;
 import pl.piomin.services.department.client.EmployeeClient;
 import pl.piomin.services.department.model.Department;
 import pl.piomin.services.department.model.Employee;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     properties = {
@@ -18,48 +20,62 @@ import pl.piomin.services.department.model.Employee;
         "spring.cloud.config.discovery.enabled=false"
     }
 )
+@AutoConfigureRestTestClient
 public class DepartmentAppTests {
 
     @Autowired
-    TestRestTemplate restTemplate;
-    @MockBean
+    RestTestClient restClient;
+    @MockitoBean
     EmployeeClient employeeClient;
 
     @Test
     void findAll() {
-        Department[] departments = restTemplate.getForObject("/", Department[].class);
-        Assertions.assertTrue(departments.length > 0);
+        restClient.get()
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(Department[].class)
+                .value(departments -> assertTrue(departments.length > 0));
     }
 
     @Test
     void findById() {
-        Department department = restTemplate.getForObject("/{id}", Department.class, 1L);
-        Assertions.assertNotNull(department);
-        Assertions.assertNotNull(department.getId());
-        Assertions.assertNotNull(department.getName());
-        Assertions.assertEquals(1L, department.getId());
+        restClient.get().uri("/{id}", 1L)
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(Department.class)
+                .value(department -> assertNotNull(department.getId()))
+                .value(department -> assertNotNull(department.getName()))
+                .value(department -> assertEquals(1L, department.getId()));
     }
 
     @Test
     void findByOrganization() {
-        Department[] departments = restTemplate.getForObject("/organization/{organizationId}", Department[].class, 1L);
-        Assertions.assertTrue(departments.length > 0);
+        restClient.get().uri("/organization/{organizationId}", 1L)
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(Department[].class)
+                .value(departments -> assertTrue(departments.length > 0));
     }
 
     @Test
     void findByOrganizationWithEmployees() {
         Mockito.when(employeeClient.findByDepartment(Mockito.anyLong()))
                 .thenReturn(Instancio.ofList(Employee.class).create());
-        Department[] departments = restTemplate.getForObject("/organization/{organizationId}/with-employees", Department[].class, 1L);
-        Assertions.assertTrue(departments.length > 0);
+        restClient.get().uri("/organization/{organizationId}/with-employees", 1L)
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(Department[].class)
+                .value(departments -> assertTrue(departments.length > 0));
     }
 
     @Test
     void add() {
         Department department = Instancio.create(Department.class);
-        department = restTemplate.postForObject("/", department, Department.class);
-        Assertions.assertNotNull(department);
-        Assertions.assertNotNull(department.getId());
-        Assertions.assertNotNull(department.getName());
+        restClient.post().body(department)
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(Department.class)
+                .value(dep -> assertNotNull(dep.getId()))
+                .value(dep -> assertNotNull(dep.getName()));
     }
 }

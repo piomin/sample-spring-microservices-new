@@ -1,11 +1,14 @@
 package pl.piomin.services.employee;
 
 import org.instancio.Instancio;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.test.web.servlet.client.RestTestClient;
 import pl.piomin.services.employee.model.Employee;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     properties = {
@@ -13,44 +16,58 @@ import pl.piomin.services.employee.model.Employee;
         "spring.cloud.config.discovery.enabled=false"
     }
 )
+@AutoConfigureRestTestClient
 public class EmployeeAppTests {
 
     @Autowired
-    TestRestTemplate restTemplate;
+    RestTestClient restClient;
 
     @Test
     void findAll() {
-        Employee[] employees = restTemplate.getForObject("/", Employee[].class);
-        Assertions.assertTrue(employees.length > 0);
+        restClient.get()
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(Employee[].class)
+                .value(employees -> assertTrue(employees.length > 0));
     }
 
     @Test
     void findById() {
-        Employee employee = restTemplate.getForObject("/{id}", Employee.class, 1L);
-        Assertions.assertNotNull(employee);
-        Assertions.assertNotNull(employee.getId());
-        Assertions.assertNotNull(employee.getName());
-        Assertions.assertEquals(1L, employee.getId());
+        restClient.get().uri("/{id}", 1L)
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(Employee.class)
+                .value(employee -> assertNotNull(employee.getId()))
+                .value(employee -> assertNotNull(employee.getName()))
+                .value(employee -> assertEquals(1L, employee.getId()));
     }
 
     @Test
     void findByOrganization() {
-        Employee[] employees = restTemplate.getForObject("/organization/{organizationId}", Employee[].class, 1L);
-        Assertions.assertTrue(employees.length > 0);
+        restClient.get().uri("/organization/{organizationId}", 1L)
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(Employee[].class)
+                .value(employees -> assertTrue(employees.length > 0));
     }
 
     @Test
     void findByDepartment() {
-        Employee[] employees = restTemplate.getForObject("/department/{departmentId}", Employee[].class, 1L);
-        Assertions.assertTrue(employees.length > 0);
+        restClient.get().uri("/department/{departmentId}", 1L)
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(Employee[].class)
+                .value(employees -> assertTrue(employees.length > 0));
     }
 
     @Test
     void add() {
         Employee employee = Instancio.create(Employee.class);
-        employee = restTemplate.postForObject("/", employee, Employee.class);
-        Assertions.assertNotNull(employee);
-        Assertions.assertNotNull(employee.getId());
-        Assertions.assertNotNull(employee.getName());
+        restClient.post().body(employee)
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(Employee.class)
+                .value(emp -> assertNotNull(emp.getId()))
+                .value(emp -> assertNotNull(emp.getName()));
     }
 }
