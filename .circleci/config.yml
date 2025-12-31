@@ -54,4 +54,4 @@ workflows:
           executor: jdk
       - analyze:
           context: SonarCloud
-#      - build-image
+      - build-image
