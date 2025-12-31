@@ -115,7 +115,7 @@
                         <artifactId>spring-boot-maven-plugin</artifactId>
                         <configuration>
                             <image>
-                                <builder>paketobuildpacks/builder-jammy-base:latest</builder>
+<!--                                <builder>paketobuildpacks/builder-jammy-base:latest</builder>-->
                                 <name>piomin/${project.artifactId}:${project.version}</name>
                             </image>
                         </configuration>
