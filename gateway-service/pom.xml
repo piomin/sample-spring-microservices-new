@@ -42,6 +42,11 @@
             <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
             <version>${spring-openai-flux.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
