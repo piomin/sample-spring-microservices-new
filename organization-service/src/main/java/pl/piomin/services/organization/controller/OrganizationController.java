@@ -21,13 +21,16 @@ public class OrganizationController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationController.class);
 	
-	@Autowired
 	OrganizationRepository repository;
-	@Autowired
 	DepartmentClient departmentClient;
-	@Autowired
 	EmployeeClient employeeClient;
-	
+
+	public OrganizationController(OrganizationRepository repository, DepartmentClient departmentClient, EmployeeClient employeeClient) {
+		this.repository = repository;
+		this.departmentClient = departmentClient;
+		this.employeeClient = employeeClient;
+	}
+
 	@PostMapping("/")
 	public Organization add(@RequestBody Organization organization) {
 		LOGGER.info("Organization add: {}", organization);
@@ -48,7 +51,7 @@ public class OrganizationController {
 
 	@GetMapping("/{id}/with-departments")
 	public Organization findByIdWithDepartments(@PathVariable("id") Long id) {
-		LOGGER.info("Organization find: id={}", id);
+		LOGGER.info("Organization with departments find: id={}", id);
 		Organization organization = repository.findById(id);
 		organization.setDepartments(departmentClient.findByOrganization(organization.getId()));
 		return organization;
@@ -56,7 +59,7 @@ public class OrganizationController {
 	
 	@GetMapping("/{id}/with-departments-and-employees")
 	public Organization findByIdWithDepartmentsAndEmployees(@PathVariable("id") Long id) {
-		LOGGER.info("Organization find: id={}", id);
+		LOGGER.info("Organization with departments and employees find: id={}", id);
 		Organization organization = repository.findById(id);
 		organization.setDepartments(departmentClient.findByOrganizationWithEmployees(organization.getId()));
 		return organization;
@@ -64,7 +67,7 @@ public class OrganizationController {
 	
 	@GetMapping("/{id}/with-employees")
 	public Organization findByIdWithEmployees(@PathVariable("id") Long id) {
-		LOGGER.info("Organization find: id={}", id);
+		LOGGER.info("Organization with employees find: id={}", id);
 		Organization organization = repository.findById(id);
 		organization.setEmployees(employeeClient.findByOrganization(organization.getId()));
 		return organization;

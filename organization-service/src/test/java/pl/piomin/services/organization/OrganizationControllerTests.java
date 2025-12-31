@@ -1,9 +1,16 @@
 package pl.piomin.services.organization;
 
+import org.instancio.Instancio;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.resttestclient.TestRestTemplate;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.web.servlet.client.RestTestClient;
+import pl.piomin.services.organization.client.DepartmentClient;
+import pl.piomin.services.organization.model.Department;
 import pl.piomin.services.organization.model.Organization;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,31 +22,54 @@ import static org.junit.jupiter.api.Assertions.*;
         "spring.cloud.config.discovery.enabled=false"
     }
 )
+@AutoConfigureRestTestClient
 public class OrganizationControllerTests {
 
     @Autowired
-    TestRestTemplate restTemplate;
+    RestTestClient restClient;
+    @MockitoBean
+    DepartmentClient departmentClient;
 
     @Test
     void findAll() {
-        Organization[] o = restTemplate.getForObject("/", Organization[].class);
-        assertTrue(o.length > 0);
+        restClient.get()
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(Organization[].class)
+                .value(organizations -> assertTrue(organizations.length > 0));
     }
 
     @Test
     void findById() {
-        Organization o = restTemplate.getForObject("/{id}", Organization.class, 1);
-        assertNotNull(o);
-        assertNotNull(o.getId());
-        assertEquals(1, o.getId());
+        restClient.get().uri("/{id}", 1L)
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(Organization.class)
+                .value(organization -> assertNotNull(organization.getId()))
+                .value(organization -> assertNotNull(organization.getName()))
+                .value(organization -> assertEquals(1L, organization.getId()));
+    }
+
+    @Test
+    void findByIdWithDepartments() {
+        Mockito.when(departmentClient.findByOrganization(Mockito.anyLong()))
+                .thenReturn(Instancio.ofList(Department.class).create());
+        restClient.get().uri("/{id}/with-departments", 1L)
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(Organization.class)
+                .value(organization -> assertNotNull(organization.getId()))
+                .value(organization -> assertFalse(organization.getDepartments().isEmpty()));
     }
 
     @Test
     void add() {
-        Organization o = new Organization("Test", "Test1");
-        o = restTemplate.postForObject("/", o, Organization.class);
-        assertNotNull(o);
-        assertNotNull(o.getId());
-        assertEquals(3, o.getId());
+        Organization department = Instancio.create(Organization.class);
+        restClient.post().body(department)
+                .exchange()
+                .expectStatus().is2xxSuccessful()
+                .expectBody(Organization.class)
+                .value(org -> assertNotNull(org.getId()))
+                .value(org -> assertNotNull(org.getName()));
     }
 }
