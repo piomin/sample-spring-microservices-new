@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   analyze:
     docker:
-      - image: 'cimg/openjdk:25.0'
+      - image: 'cimg/openjdk:25.0.1'
     steps:
       - checkout
       - git-shallow-clone/checkout_advanced:
@@ -35,7 +35,7 @@ jobs:
 executors:
   jdk:
     docker:
-      - image: 'cimg/openjdk:25.0'
+      - image: 'cimg/openjdk:25.0.1'
   vm:
     machine:
       image: ubuntu-2204:current
