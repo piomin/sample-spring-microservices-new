@@ -12,9 +12,7 @@
   ],
   "hostRules": [
     {
-      "matchHost": "docker.io",
-      "username": "piomin",
-      "password": "Piot_123"
+      "matchHost": "docker.io"
     }
   ]
 }
