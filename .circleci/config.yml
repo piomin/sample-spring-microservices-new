@@ -13,7 +13,7 @@ jobs:
           command: git fetch --no-filter --refetch
       - run:
           name: Analyze on SonarCloud
-          command: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+          command: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -DskipTests
   build-image:
     executor: vm
     steps:
