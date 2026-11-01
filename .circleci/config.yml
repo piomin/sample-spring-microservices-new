@@ -44,7 +44,7 @@ executors:
       platform: "linux/amd64"
 
 orbs:
-  maven: circleci/maven@2.2.0
+  maven: circleci/maven@2.4.0
   git-shallow-clone: guitarrapc/git-shallow-clone@2.8.0
 
 workflows:
